@@ -1,8 +1,7 @@
 import GameSavingLoader from '../gamesavingloader';
 
-test('GameSavingLoader should work with promise and async/await', async () => {
-  const data = await GameSavingLoader.load();
-  const expected = JSON.stringify({
+test('GameSavingLoader should work with promise and async/await', () => {
+  const expected = {
     id: 9,
     created: 1546300800,
     userInfo: {
@@ -11,6 +10,6 @@ test('GameSavingLoader should work with promise and async/await', async () => {
       level: 10,
       points: 2000,
     },
-  });
-  expect(data).toEqual(expected);
+  };
+  return GameSavingLoader.load().then((saving) => expect(saving).toEqual(expected));
 });
